@@ -1,5 +1,4 @@
 class Negociacao {
-    //cria variaves e atribui no construtor
     constructor(_data, _quantidade, _valor) {
         this._data = _data;
         this._quantidade = _quantidade;

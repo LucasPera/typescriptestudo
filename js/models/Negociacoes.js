@@ -1,6 +1,5 @@
 class Negociacoes {
     constructor() {
-        //cria um array de negociação
         this._negociacoes = [];
     }
     adiciona(negociacao) {
