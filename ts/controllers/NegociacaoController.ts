@@ -6,6 +6,7 @@ class NegociacaoController {
     //cria e inicializa
     private _negociacoes = new Negociacoes();
     private _negociacoesView = new NegociacoesView('#negociacoesView');
+    private _mensagemView = new MensagemView('#mensagemView');
 
     constructor() {
         
@@ -31,6 +32,8 @@ class NegociacaoController {
         this._negociacoes.adiciona(negociacao);
 
         this._negociacoesView.update(this._negociacoes);
+
+        this._mensagemView.update('Negociação adiciona com sucesso!');
         
     }
         
