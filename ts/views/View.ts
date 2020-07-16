@@ -4,8 +4,8 @@ export abstract class View<T> {
     private _elemento: JQuery;
     private _escapar:boolean;
 
-    //? é parametro opcional, sempre tem q ser os ultimos
-    constructor(seletor: string, escapar?: boolean) {
+    //é parametro opcional, se n for passado fica false
+    constructor(seletor: string, escapar: boolean = false) {
         this._elemento = $(seletor);
         this._escapar = escapar;
     }
