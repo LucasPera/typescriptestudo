@@ -1,4 +1,4 @@
-class Negociacao{
+export class Negociacao{
 
     //cria variaves e atribui no construtor
     constructor(private _data: Date, private _quantidade: number, private _valor: number){}
