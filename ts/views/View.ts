@@ -1,3 +1,5 @@
+import { logarTempoDeExecucao } from '../helpers/decorators/index';
+
 //classe para usar construtor padrão nas outras views
 export abstract class View<T> {
     
