@@ -62,35 +62,37 @@ export class NegociacaoController {
     }
 
     @throttle()
-    importaDados(): void {
+    async importaDados() {
 
-        //se api retorna ok
-        function isOk(res: Response) {
-            if(res.ok) {
-                return res;
-            } else {
-                throw new Error(res.statusText);
-            }
+        try {
+            
+            //suspende a execução e quando terminar volta nesse trecho (assincrono)
+            const negociacoesParaImportar = await this._service
+                .obterNegociacoes(res => {
+    
+                    if(res.ok) {
+                        return res;
+                    } else {
+                        throw new Error(res.statusText);
+                    }
+                });
+                 
+            const negociacoesJaImportadas = this._negociacoes.paraArray();
+    
+            //adiciona apenas negociacoes que não existem
+            negociacoesParaImportar
+                .filter(negociacao => 
+                    !negociacoesJaImportadas.some(jaImportada => 
+                        negociacao.ehIgual(jaImportada)))
+            .forEach(negociacao => 
+                this._negociacoes.adiciona(negociacao))
+            
+            this._negociacoesView.update(this._negociacoes);         
+            
+        } catch (error) {
+            this._mensagemView.update(error.message);
         }
 
-
-        this._service    
-            .obterNegociacoes(isOk)
-            .then(negociacoesParaImportar => {
-                
-                const negociacoesJaImportadas = this._negociacoes.paraArray();
-
-                //adiciona apenas negociacoes que não existem
-                negociacoesParaImportar
-                    .filter(negociacao => 
-                        !negociacoesJaImportadas.some(jaImportada => 
-                            negociacao.ehIgual(jaImportada)))
-                .forEach(negociacao => 
-                    this._negociacoes.adiciona(negociacao))
-                
-                this._negociacoesView.update(this._negociacoes);
-            });
-                
     }
         
 }
