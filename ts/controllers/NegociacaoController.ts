@@ -1,8 +1,8 @@
 import { NegociacoesView, MensagemView } from '../views/index';
 import { Negociacoes, Negociacao } from '../models/index';
 import { domInject, throttle } from '../helpers/decorators/index';
-import { NegociacaoParcial } from '../models/index';
 import { NegociacaoService } from '../services/index';
+import { imprime } from '../helpers/index';
 
 
 let timer = 0;
@@ -46,6 +46,8 @@ export class NegociacaoController {
         );
 
         this._negociacoes.adiciona(negociacao);
+
+        imprime(negociacao, this._negociacoes);
 
         this._negociacoesView.update(this._negociacoes);
 
