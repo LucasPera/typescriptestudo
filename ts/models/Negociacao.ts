@@ -1,6 +1,6 @@
-import { Imprimivel } from './Imprimivel';
+import { MeuObjeto } from './MeuObjeto';
 
-export class Negociacao implements Imprimivel {
+export class Negociacao implements MeuObjeto<Negociacao> {
 
     //cria variaves e atribui no construtor
     //readonly, apenas leitura. nessa caso não precisa dos gets
@@ -21,6 +21,13 @@ export class Negociacao implements Imprimivel {
             Valor: ${this.valor} 
             Volume: ${this.volume}`
         );
+    }
+
+    ehIgual(negociacao: Negociacao): boolean {
+        
+        return this.data.getDate() == negociacao.data.getDate()
+            && this.data.getMonth() == negociacao.data.getMonth()
+            && this.data.getFullYear() == negociacao.data.getFullYear();
     }
 
 }
